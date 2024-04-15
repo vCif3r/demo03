@@ -42,7 +42,7 @@ def index():
 
 @app.route('/registrar', methods=['POST'])
 def registrar():
-    dni = request.form['documento']
+    dni = request.form['dni']
     nombre = request.form['nombre']
     apellido = request.form['apellido']
     direccion = request.form['direccion']
