@@ -22,7 +22,7 @@ def conectar_db():
 def crear_persona(dni, nombre, apellido, direccion, telefono):
     conn = conectar_db()
     cursor = conn.cursor()
-    cursor.execute("INSERT INTO persona (dni, nombre, apellido, direccion, telefono) VALUES (%s, %s, %s, %s, %s)",
+    cursor.execute("INSERT INTO persona (documento, nombre, apellido, direccion, telefono) VALUES (%s, %s, %s, %s, %s)",
                    (dni, nombre, apellido, direccion, telefono))
     conn.commit()
     conn.close()
@@ -42,7 +42,7 @@ def index():
 
 @app.route('/registrar', methods=['POST'])
 def registrar():
-    dni = request.form['dni']
+    dni = request.form['documento']
     nombre = request.form['nombre']
     apellido = request.form['apellido']
     direccion = request.form['direccion']
@@ -61,7 +61,7 @@ def eliminar_registro(dni):
     conn = psycopg2.connect(
         dbname=DB_NAME, user=DB_USER, password=DB_PASSWORD, host=DB_HOST)
     cursor=conn.cursor()
-    cursor.execute("DELETE FROM persona WHERE dni = %s", (dni,))
+    cursor.execute("DELETE FROM persona WHERE documento = %s", (dni,))
     conn.commit()
     conn.close()
     return redirect(url_for('administrar'))
