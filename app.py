@@ -5,10 +5,10 @@ import psycopg2
 app = Flask(__name__, template_folder='templates')
 
 # Configuración de la base de datos
-DB_HOST = 'monorail.proxy.rlwy.net'
-DB_NAME = 'railway'
-DB_USER = 'postgres'
-DB_PASSWORD = 'MDKBYFGerdHPErjmxNGfjEOJqAbqCThI'
+DB_HOST = 'dpg-coea4b8l6cac73c0956g-a.oregon-postgres.render.com'
+DB_NAME = 'dbrender_kado'
+DB_USER = 'dbrender_kado_user'
+DB_PASSWORD = '7kuSk5252vVyT021ppJdVtoj1hPrkzjn'
 
 def conectar_db():
     try:
