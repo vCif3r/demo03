@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administrar Registros de Personas</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <div class="container">
+        <a href="/" class="index-link">Retornar a pagina principal</a>
+        <h1>Administracion del Registro de Personal</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>DNI</th>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th>Dirección</th>
+                    <th>Teléfono</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for registro in registros%}
+                <tr>
+                    <td>{{registro[1]}}</td>
+                    <td>{{registro[2]}}</td>
+                    <td>{{registro[3]}}</td>
+                    <td>{{registro[4]}}</td>
+                    <td>{{registro[5]}}</td>
+                    <td>
+                        <form id="eliminarForm{{ loop.index }}" action="/eliminar/{{registro[1]}}" method="post">
+                            <button type="button" data-index="{{ loop.index }}" onclick="confirmarEliminacion(this)" data-nombre="{{ registro[2] }}">Eliminar</button>
+                        </form>
+                    </td>                    
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <script>
+        function confirmarEliminacion(button) {
+            var nombre = button.getAttribute('data-nombre');
+            var index = button.getAttribute('data-index');
+            if (confirm('¿Está seguro que desea eliminar el registro ' + nombre + ' indice(' + index + ')?')) {
+                document.getElementById('eliminarForm' + index).submit()
+        }}
+    </script>
+</body>
+</html>
